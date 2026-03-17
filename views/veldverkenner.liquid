@@ -1,0 +1,48 @@
+{% render 'partials/head4.liquid' %}
+<header class="topbar">
+    <h1>Veldverkenner <span class="progress">0/14</span> 🎁</h1>
+</header>
+
+
+<main class="map-wrapper">
+
+<div class="map-scroll">
+
+<div class="map">
+
+<img src="/assets/veldkaart.png" alt="Interactieve kaart met verschillende zones">
+
+<!-- pins -->
+<button class="pin" style="top:22%; left:35%;" aria-label="Zone opdracht"></button>
+<button class="pin" style="top:40%; left:70%;" aria-label="Zone opdracht"></button>
+<button class="pin" style="top:65%; left:55%;" aria-label="Zone opdracht"></button>
+<button class="pin" style="top:80%; left:60%;" aria-label="Zone opdracht"></button>
+
+</div>
+
+</div>
+<!-- floating buttons -->
+<div class="side-buttons">
+
+<button class="circle-btn" aria-label="Bekijk zones">
+<span>☰</span>
+<p>Zones</p>
+</button>
+
+<button class="circle-btn" aria-label="Uitleg">
+<span>?</span>
+<p>Uitleg</p>
+</button>
+
+</div>
+
+
+
+
+</main>
+
+
+
+
+{% render 'partials/nav.liquid' %}
+{% render 'partials/foot.liquid' %}
