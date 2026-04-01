@@ -67,18 +67,13 @@ app.get('/collectie', async function (request, response) {
 
 app.get('/nabloei', async function (request, response) {
  
-  const params = {
-  
-
-  'filter[squads][_nempty]': 'true'
-}
   // Haal alle personen uit de WHOIS API op, van dit jaar, gesorteerd op id
  
-  const nabloeiResponse = await fetch('https://fdnd-agency.directus.app/items/frankendael_plants?filter[users][frankendael_users_id][id]=1' + new URLSearchParams(params))
+  const plantResponse = await fetch('https://fdnd-agency.directus.app/items/frankendael_plants?filter[users][frankendael_users_id][id]=1')
  
   // En haal daarvan de JSON op
-  const nabloeiResponseJSON = await nabloeiResponse.json()
-    response.render('collectie-na-de-bloei.liquid', {nabloei: nabloeiResponseJSON.data})
+  const plantResponseJSON = await plantResponse.json()
+    response.render('collectie-na-de-bloei.liquid', {plant: plantResponseJSON.data})
 })
 
 // app.get('/nabloei', async function (request, response) {
@@ -86,15 +81,25 @@ app.get('/nabloei', async function (request, response) {
 //    // Geef hier eventueel data aan mee
 //    response.render('collectie-na-de-bloei.liquid')
 // })
-
+  
 app.get('/inbloei', async function (request, response) {
    // Render index.liquid uit de Views map
    // Geef hier eventueel data aan mee
-     const plantResponse = await fetch('https://fdnd-agency.directus.app/items/frankendael_plants')
+     const plantResponse = await fetch('https://fdnd-agency.directus.app/items/frankendael_plants?filter[users][frankendael_users_id][id]=1')
  
   // En haal daarvan de JSON op
   const plantResponseJSON = await plantResponse.json()
     response.render('collectie-in-de-bloei.liquid', {plant: plantResponseJSON.data})
+})
+
+app.get('/bloem/:slug', async function (request, response) {
+   // Render index.liquid uit de Views map
+   // Geef hier eventueel data aan mee
+     const plantResponse = await fetch('https://fdnd-agency.directus.app/items/frankendael_plants?filter[slug]='+ request.params.slug)
+ 
+  // En haal daarvan de JSON op
+  const plantResponseJSON = await plantResponse.json()
+    response.render('collectie-bloem.liquid', {plant: plantResponseJSON.data[0] })
 })
 
 // Maak een POST route voor de index; hiermee kun je bijvoorbeeld formulieren afvangen
