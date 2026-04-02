@@ -56,7 +56,11 @@ app.get('/nieuws', async function (request, response) {
 app.get('/veldverkenner', async function (request, response) {
    // Render index.liquid uit de Views map
    // Geef hier eventueel data aan mee
-   response.render('veldverkenner.liquid')
+   const zoneResponse = await fetch('https://fdnd-agency.directus.app/items/frankendael_plants')
+   
+
+   const zoneResponseJSON = await zoneResponse.json()
+   response.render('veldverkenner.liquid', {zone: zoneResponseJSON.data})
 })
 
 app.get('/collectie', async function (request, response) {
@@ -92,6 +96,16 @@ app.get('/inbloei', async function (request, response) {
     response.render('collectie-in-de-bloei.liquid', {plant: plantResponseJSON.data})
 })
 
+app.get('/plant_opdracht/:slug', async function (request, response) {
+   // Render index.liquid uit de Views map
+   // Geef hier eventueel data aan mee
+     const vraagResponse = await fetch('https://fdnd-agency.directus.app/items/frankendael_plants?filter[slug]='+ request.params.slug)
+ 
+  // En haal daarvan de JSON op
+  const vraagResponseJSON = await vraagResponse.json()
+    response.render('plant-details.liquid', {vraag: vraagResponseJSON.data[0] })
+})
+
 app.get('/bloem/:slug', async function (request, response) {
    // Render index.liquid uit de Views map
    // Geef hier eventueel data aan mee
@@ -108,6 +122,32 @@ app.post('/', async function (request, response) {
   // Je zou hier data kunnen opslaan, of veranderen, of wat je maar wilt
   // Er is nog geen afhandeling van een POST, dus stuur de bezoeker terug naar /
   response.redirect(303, '/')
+})
+
+// <form action="/nieuws/{{ news.id }}/{{ news.slug }}" method="POST"> vanuit formulier op de nieuwspagina wordt deze post route aangestuurd
+app.post('/plant_opdracht', async (request, response) => {
+  
+    console.log(request.body)
+    const postResponse = await fetch(
+      'https://fdnd-agency.directus.app/items/frankendael_users_plants', // API n point van de nieuws comments (hier kan je een GET en POST doen)
+      {
+        // dit is JSON object met de benodigde data om wat op te slaan
+        method: 'POST', // methode post meegeven zodat de server weet dat er data opgeslagen moet worden
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          news: request.body.id,     
+          comment: request.body.comment,  // dit is wat er in het formulierelement staat <textarea name="comment" required maxlength="100" style="height: 30px;"></textarea>
+          name: request.body.name
+        })
+      }
+    )
+ 
+    const postJSON = await postResponse.json()
+ 
+    // response.redirect(`/nieuws/${request.params.slug}`) // als de post gelukt is eeen redirect naar de get route VAN HET NIEUWA ARTIKEL
+    response.redirect(`/nieuws/${request.params.slug}#${postJSON.data.id}`)
 })
 
 // Stel het poortnummer in waar Express op moet gaan luisteren

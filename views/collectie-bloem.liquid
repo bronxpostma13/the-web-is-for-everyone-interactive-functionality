@@ -1,4 +1,31 @@
-{% render 'partials/head.liquid' %}
+{% render 'partials/head5.liquid' %}
 
+<header class="page-header">
+    <a href="/collectie" class="back-button">← Terug</a>
+    <h1>Planten</h1>
+    
+</header>
 
+  <main>
+    <article class="card" aria-labelledby="plant-title">
+      <h2 >{{ plant.name }}</h2>
+       <img src="https://fdnd-agency.directus.app/assets/{{ plant.in_bloom }}" width="50%" alt="plant">
+      <h3>omschrijving:</h3>
+
+      <p>
+        {{ plant.omscription}}
+      </p>
+
+      <p>
+        {{ plant.description }}
+      </p>
+        
+      <h3>Waar kan ik deze plant vinden?</h3>
+
+    <p>Deze plant kan je vinden in zone {{ plant.zones }}</p>
+      
+    </article>
+  </main>
+
+{% render 'partials/nav.liquid' %}
 {% render 'partials/foot.liquid' %}
