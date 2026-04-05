@@ -211,4 +211,29 @@ flex:0 0 300px;
 max-width:600px;
 }
 
-} 
+} } 
+
+@media (prefers-color-scheme: dark) {
+ body{
+  background-color: var(--background-color-6);
+ }
+ h1{
+  color: var(--text-color-1);
+ }
+ h2{
+  color: var(--text-color-1);
+ }
+ .topbar{
+  background: #353434;
+ }
+ .bottom-nav{
+  background: var(--background-color-6);
+ }
+ .nav-item {
+color: white;
+}
+
+.nav-item svg{
+color: white;
+}
+}
