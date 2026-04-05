@@ -5,6 +5,10 @@ import express from 'express'
 // Importeer de Liquid package (ook als dependency via npm geïnstalleerd)
 import { Liquid } from 'liquidjs';
 
+const reactieResponse = await fetch('https://fdnd-agency.directus.app/items/frankendael_news_comments')
+
+// Lees van de response van die fetch het JSON object in, waar we iets mee kunnen doen
+const reactieResponseJSON = await reactieResponse.json()
 
 console.log('Hieronder moet je waarschijnlijk nog wat veranderen')
 // Doe een fetch naar de data die je nodig hebt
@@ -45,12 +49,6 @@ app.get('/', async function (request, response) {
   // En haal daarvan de JSON op
   const plantResponseJSON = await plantResponse.json()
     response.render('index.liquid', {plant: plantResponseJSON.data})
-})
-
-app.get('/nieuws', async function (request, response) {
-   // Render index.liquid uit de Views map
-   // Geef hier eventueel data aan mee
-   response.render('nieuws.liquid')
 })
 
 app.get('/veldverkenner', async function (request, response) {
@@ -94,6 +92,19 @@ app.get('/inbloei', async function (request, response) {
   // En haal daarvan de JSON op
   const plantResponseJSON = await plantResponse.json()
     response.render('collectie-in-de-bloei.liquid', {plant: plantResponseJSON.data})
+})
+
+app.get('/nieuws', async function (request, response) {
+   // Render index.liquid uit de Views map
+   // Geef hier eventueel data aan mee
+     const artikelResponse = await fetch('https://fdnd-agency.directus.app/items/frankendael_news')
+ 
+  // En haal daarvan de JSON op
+  const artikelResponseJSON = await artikelResponse.json()
+    response.render('nieuws.liquid', {news: artikelResponseJSON.data})
+
+   
+
 })
 
 app.get('/plant_opdracht/:slug', async function (request, response) {
