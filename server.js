@@ -107,6 +107,16 @@ app.get('/nieuws', async function (request, response) {
 
 })
 
+app.get('/nieuws_detail/:slug', async function (request, response) {
+   
+     const artikelResponse = await fetch('https://fdnd-agency.directus.app/items/frankendael_news?filter[slug]='+ request.params.slug)
+
+ 
+  
+  const artikelResponseJSON = await artikelResponse.json()
+    response.render('nieuws-details.liquid', {news: artikelResponseJSON.data[0], reactie: reactieResponseJSON.data })
+});
+
 app.get('/plant_opdracht/:slug', async function (request, response) {
    // Render index.liquid uit de Views map
    // Geef hier eventueel data aan mee
