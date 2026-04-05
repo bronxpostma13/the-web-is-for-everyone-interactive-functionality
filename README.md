@@ -32,7 +32,7 @@ Door het doel einde van de site/app ben ik vooral gefocusseerd op het design van
 Hier zijn screenshots van de thuis pagina op ipad en telefoon (de witte lijn is een foutje in me darkmode versie, ik werk er nog aan
 
 
-<img width="561" height="909" alt="Scherm­afbeelding 2026-04-05 om 19 24 06" src="https://github.com/user-attachments/assets/a6ab983e-de58-4b80-976e-d6b97e0a7536" />
+<img width="561" height="900" alt="Scherm­afbeelding 2026-04-05 om 19 24 06" src="https://github.com/user-attachments/assets/a6ab983e-de58-4b80-976e-d6b97e0a7536" />
 
 <img width="826" height="904" alt="Scherm­afbeelding 2026-04-05 om 19 23 36" src="https://github.com/user-attachments/assets/ac314dc5-12b6-4006-80dc-739f82b92df2" />
 
