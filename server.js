@@ -117,6 +117,33 @@ app.get('/nieuws_detail/:slug', async function (request, response) {
     response.render('nieuws-details.liquid', {news: artikelResponseJSON.data[0], reactie: reactieResponseJSON.data })
 });
 
+app.post('/nieuws_detail/:slug', async (request, response) => { 
+  
+    console.log(request.body)
+    const postResponse = await fetch(
+      'https://fdnd-agency.directus.app/items/frankendael_news_comments',
+      {
+        // dit is JSON object met de benodigde data om wat op te slaan
+        method: 'POST', 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          news: request.body.id,     
+          comment: request.body.comment,  
+          name: request.body.name,
+          activeIcon: 'nieuws',
+        })
+      }
+    )
+
+    const postJSON = await postResponse.json()
+
+    
+    response.redirect(`/nieuws_detail/${request.params.slug}#${postJSON.data.id}`)
+})
+
+
 app.get('/plant_opdracht/:slug', async function (request, response) {
    // Render index.liquid uit de Views map
    // Geef hier eventueel data aan mee
